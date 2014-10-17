@@ -37,7 +37,8 @@ your terminal should give you the status of your Shiny Server. Open your browser
 and visit *localhost:7070* to view the sample app.
 
 To shutdown the server execute `vagrant halt`. This will stop the VM. To boot 
-the server again execute `vagrant up`. 
+the server again execute `vagrant up`. You do not need to execute `fab 
+vagrant setup_vagrant` if the process completed successfully earlier.
 Creating Apps
 -------------
 During the setup process, the Shiny Server on your VM was directed to look in a 
