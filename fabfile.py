@@ -1,4 +1,4 @@
-from fabric.api import run, sudo, env, require, settings
+from fabric.api import run, sudo, env, require, settings, local
 from fabric.contrib.files import exists
 import subprocess
 
@@ -39,6 +39,10 @@ def setup_vagrant():
     sub_install_packages()
     sub_install_shiny()
 
+def reload():
+    require('hosts', provided_by=[vagrant])
+    sudo('restart shiny-server')
+
 ### SUB-ROUTINES ###
 
 def sub_add_repos():
@@ -59,20 +63,32 @@ def sub_install_packages():
 
 def sub_install_shiny():
     """Installs Shiny package and Shiny Server"""
-    # with settings(sudo_user='root'):
-    #     sudo('R -e "install.packages(\'shiny\', '
-    #          'repos=\'http://cran.rstudio.com/\')"')
-
     # Install Shiny package with R
     sudo('R -e "install.packages(\'shiny\', '
          'repos=\'http://cran.rstudio.com/\')"')
 
-    # Install Shiny Server using gdebi
+    # Install Shiny Server using gdebi. According to documentation, will be
+    # installed into /opt/shiny-server/ with main executable in
+    # /opt/shiny-server/bin/shiny-server. Also new user 'shiny' will be
+    # created.
     sudo('mkdir -p /usr/src/shiny')
     sudo('''cd /usr/src/shiny; if [ ! -e shiny-server-1.2.3.368-amd64.deb ];
     then a='http://download3.rstudio.org/ubuntu-12.04/x86_64/shiny-server-' ; \
     b='1.2.3.368-amd64.deb' ; \
     wget $a$b ; \
-    echo y | gdebi shiny-server-1.2.3.368-amd64.deb;
+    echo y | gdebi shiny-server-1.2.3.368-amd64.deb ; \
     fi''')
+
+    # Move server directory at /srv/shiny-server to shared Vagrant folder if
+    # the shared folder is empty. This will copy sample Shiny app in the
+    # process.
+    sudo('''if [ 'find /www-shiny -maxdepth 0 -empty | read v' ]; then \
+    cp -LR /srv/shiny-server/* /www-shiny/ ; \
+    rm -rf /srv/shiny-server ; \
+    ln -s /www-shiny/ /srv/shiny-server;
+    fi''')
+
+    # Restart server
+    local('vagrant reload')
+    run('status shiny-server')
 
