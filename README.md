@@ -2,9 +2,10 @@ Shiny
 =====
 Description
 -----------
-This will create and run a local Shiny Server to enable viewing of the sample
-Shiny application and the creation your own Shiny app. This is suitable for 
-both local development and future deployment of a Shiny Server with your app.
+This will create and run a local Shiny Server for R to enable viewing of the 
+sample Shiny application and the creation your own Shiny app. This is 
+suitable for both local development and future deployment of a Shiny Server 
+with your app.
 
 Creating the server requires very few commands since the process is 
 almost entirely automated by Fabric. The commands described below will create
@@ -19,6 +20,9 @@ Requirements
 If you are using Windows the requirements and process should be similar, 
 if not exactly the same. The installation of Python/Fabric is likely the 
 only challenge, but both work on Windows if installed correctly.
+
+System Requirements: 2GB RAM Min.
+
 For ease, use Mac OSX or Linux and install the following:
 
 + **VirtualBox:** https://www.virtualbox.org/wiki/Downloads
@@ -27,6 +31,7 @@ For ease, use Mac OSX or Linux and install the following:
 
 It is likely that you already have Python, which Fabric requires. If you are 
 unsure, open Terminal and execute `python`.
+
 Installation
 ------------
 Clone this repository into a folder on your computer. Then open your Terminal
