@@ -34,7 +34,7 @@ unsure, open Terminal and execute `python`.
 
 Installation
 ------------
-Clone this repository into a folder on your computer. Then open your Terminal
+Clone or download this repository onto your computer. Then open your Terminal
 and `cd` into the repository on your computer. Run `vagrant up` to create 
 the virtual machine. Finally, run `fab vagrant setup_vagrant` to install and
 set up the Shiny Server and its dependencies. That's it! The last line in 
