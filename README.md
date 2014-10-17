@@ -36,6 +36,8 @@ set up the Shiny Server and its dependencies. That's it! The last line in
 your terminal should give you the status of Shiny Server. Open your browser
 and visit *localhost:7070* to view the sample app.
 
+To shutdown the server execute `vagrant halt` to stop the VM. To boot the 
+server again execute `vagrant up`. 
 Creating Apps
 -------------
 During the setup process, the Shiny Server on your VM was directed to look in a 
