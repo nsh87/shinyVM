@@ -10,7 +10,8 @@ GIT_REPO = 'nsh87/shiny'
 
 # Packages to install in Vagrant
 INSTALL_PACKAGES = ['r-base',
-                    'gdebi-core']
+                    'gdebi-core',
+                    'haskell-platform']
 
 ### ENVIRONMENTS ###
 
@@ -63,7 +64,7 @@ def sub_install_packages():
 
 def sub_install_shiny():
     """Installs Shiny package and Shiny Server"""
-    # Install Shiny package with R
+    # Install Shiny package for R
     sudo('R -e "install.packages(\'shiny\', '
          'repos=\'http://cran.rstudio.com/\')"')
 
@@ -88,7 +89,17 @@ def sub_install_shiny():
     ln -s /www-shiny/ /srv/shiny-server;
     fi''')
 
-    # Restart server
+    sub_install_rmarkdown()
+
+    # Restart VM
     local('vagrant reload')
     run('status shiny-server')
 
+def sub_install_rmarkdown():
+    """Installs the packages required for Shiny to serve markdown documents.
+    Haskell is a prerequisite that should have been installed earlier. Pandoc is
+    also required."""
+    run('cabal update')
+    run('cabal install pandoc')
+    sudo('R -e "install.packages(\'rmarkdown\', '
+         'repos=\'http://cran.rstudio.com/\')"')
