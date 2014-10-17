@@ -2,3 +2,4 @@
 .swo
 .swp
 .vagrant
+*.pyc
