@@ -19,11 +19,12 @@ Requirements
 ------------
 If you are using Windows the requirements and process should be similar, 
 if not exactly the same. The installation of Python/Fabric is likely the 
-only challenge, but both work on Windows if installed correctly.
+only challenge, but both work on Windows if installed correctly. For ease, 
+use Mac OS X or Linux.
 
 System Requirements: 2GB RAM Min. and 3GB Free HD Space
 
-For ease, use Mac OSX or Linux and install the following:
+Install the following:
 
 + **VirtualBox:** https://www.virtualbox.org/wiki/Downloads
 + **Vagrant:** https://www.vagrantup.com/downloads
