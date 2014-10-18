@@ -21,7 +21,7 @@ If you are using Windows the requirements and process should be similar,
 if not exactly the same. The installation of Python/Fabric is likely the 
 only challenge, but both work on Windows if installed correctly.
 
-System Requirements: 2GB RAM Min.
+System Requirements: 2GB RAM Min. and 3GB Free HD Space
 
 For ease, use Mac OSX or Linux and install the following:
 
@@ -30,7 +30,11 @@ For ease, use Mac OSX or Linux and install the following:
 + **Fabric:** http://www.fabfile.org/installing.html
 
 It is likely that you already have Python, which Fabric requires. If you are 
-unsure, open Terminal and execute `python`.
+unsure, open Terminal and execute `python`. The requirements above occupy 
+~200 megabytes of space (largely from VirtualBox and Vagrant). They can be 
+removed once you are done with Shiny Server, but it is suggested that you do 
+not uninstall them since they are common development tools that you might use
+in the future.
 
 Installation
 ------------
@@ -52,3 +56,8 @@ you view the sample Shiny app in your browser, the Shiny Server reads the
 files in this folder. Any modifications to files in this folder will be 
 visible to the VM, so you can simply delete the sample app and develop your app
 in **project/** on your host machine.
+Uninstallation
+--------------
+Since everything is installed into a VM, you can easily remove the VM to 
+uninstall the server and reclaim disk space. In your **shiny** folder, 
+execute `vagrant destroy` and then `vagrant box remove 'ubuntu/trusty64'`.
