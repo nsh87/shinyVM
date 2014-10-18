@@ -30,11 +30,12 @@ For ease, use Mac OSX or Linux and install the following:
 + **Fabric:** http://www.fabfile.org/installing.html
 
 It is likely that you already have Python, which Fabric requires. If you are 
-unsure, open Terminal and execute `python`. The requirements above occupy 
-~200 megabytes of space (largely from VirtualBox and Vagrant). They can be 
-removed once you are done with Shiny Server, but it is suggested that you do 
-not uninstall them since they are common development tools that you might use
-in the future.
+unsure, open Terminal and execute `python`.
+
+The requirements above occupy ~200 megabytes of space (largely from 
+VirtualBox and Vagrant). They can be removed once you are done with Shiny  
+Server, but it is suggested that you do not uninstall them since they are 
+common development tools that you might use in the future.
 
 Installation
 ------------
