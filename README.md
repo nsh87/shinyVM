@@ -65,10 +65,11 @@ new shared folder called **project** that was created in your repository. When
 you view the sample Shiny app in your browser, the Shiny Server reads the 
 files in this folder. Any modifications to files in this folder will be 
 visible to the VM, so you can simply delete the sample app and develop your app
-in **project/** on your host machine.
+in **shiny/project/** on your host machine. (See the bottom of this Readme for
+a visual of the directory structure).
 
 If your app requires any additional R packages, SSH into the VM with `vagrant
-ssh` (make sure you are in the **shiny** folder) and install them. For 
+ssh` (make sure you are in the **shiny** folder first) and install them. For 
 example, you can install the deSolve package with `vagrant ssh` and then 
 `sudo R -e "install.packages('deSolve', repos='http://cran.rstudio.com/')"`. 
 Uninstallation
@@ -100,6 +101,7 @@ up`, then Vagrant might be facing permissions issues when trying to
 create the folder. Delete your VM, create a blank folder called **project** 
 in your repo, and start over. See below for the expected folder structure.
 
+### Directory Structure
 After `vagrant up` completes, your directory structure should look like this:  
 */shiny/*  
 |-- fabfile.py  
