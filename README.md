@@ -38,6 +38,11 @@ VirtualBox and Vagrant). They can be removed once you are done with Shiny
 Server, but it is suggested that you do not uninstall them since they are 
 common development tools that you might use in the future.
 
+You also need to have an SSH key, since it will be used when setting up your 
+VM with Vagrant. See the GitHub instructions for [checking for and creating 
+an SSH key][1]. You do not need to go through Step 3 and 4 in their 
+instructions, and if you find a key named `id_rsa` in Step 1 then you can 
+also skip Step 2.
 Installation
 ------------
 Clone or download this repository onto your computer. Then open your Terminal
@@ -50,6 +55,10 @@ and visit *localhost:7070* to view the sample app.
 To shutdown the server execute `vagrant halt`. This will stop the VM. To boot 
 the server again execute `vagrant up`. You do not need to execute `fab 
 vagrant setup_vagrant` if the process completed successfully earlier.
+
+If things do not run as expected see the Troubleshooting section below. 
+Remember that you can destroy and reinitiate your VM and run `fab vagrant 
+setup_vagrant` as many times as you want if the process is interrupted.
 Creating Apps
 -------------
 During the setup process, the Shiny Server on your VM was directed to look in a 
@@ -63,3 +72,17 @@ Uninstallation
 Since everything is installed into a VM, you can easily remove the VM to 
 uninstall the server and reclaim disk space. In your **shiny** folder, 
 execute `vagrant destroy` and then `vagrant box remove 'ubuntu/trusty64'`.
+Troubleshooting
+---------------
++ If you have issues when running `vagrant up`, make sure you have an SSH key. 
+If you don't have one then you will see a `Connection timeout: Retrying....` 
+warning during this step.
++ If you have just installed any of the requirements (VirtualBox, Vagrant, 
+Fabric), try restarting your computer and starting the process over again
+(i.e. destroy your VM).
++ If you see an error regarding an installation of Paramiko when executing 
+`fab vagrant setup_vagrant` remove Fabric and reinstall Paramiko first: open 
+Terminal and execute `sudo pip uninstall fabric`, then `sudo pip install 
+paramiko==1.10`, then `sudo pip install fabric`.
+
+[1]: https://help.github.com/articles/generating-ssh-keys/
