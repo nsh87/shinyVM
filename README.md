@@ -49,16 +49,15 @@ Clone or download this repository onto your computer. Then open your Terminal
 and `cd` into the repository on your computer. Run `vagrant up` to create 
 the virtual machine. Finally, run `fab vagrant setup_vagrant` to install and
 set up the Shiny Server and its dependencies. That's it! The last line in 
-your terminal should give you the status of your Shiny Server. Open your browser
-and visit *localhost:7070* to view the sample app.
+your terminal should give you the status of your Shiny Server. Open your 
+web browser and using the address bar visit *localhost:7070* to view the 
+sample app.
 
 To shutdown the server execute `vagrant halt`. This will stop the VM. To boot 
 the server again execute `vagrant up`. You do not need to execute `fab 
 vagrant setup_vagrant` if the process completed successfully earlier.
 
 If things do not run as expected see the Troubleshooting section below. 
-Remember that you can destroy and reinitiate your VM and run `fab vagrant 
-setup_vagrant` as many times as you want if the process is interrupted.
 Creating Apps
 -------------
 During the setup process, the Shiny Server on your VM was directed to look in a 
@@ -67,6 +66,11 @@ you view the sample Shiny app in your browser, the Shiny Server reads the
 files in this folder. Any modifications to files in this folder will be 
 visible to the VM, so you can simply delete the sample app and develop your app
 in **project/** on your host machine.
+
+If your app requires any additional R packages, SSH into the VM with `vagrant
+ssh` (make sure you are in the **shiny** folder) and install them. For 
+example, you can install the deSolve package with `vagrant ssh` and then 
+`sudo R -e "install.packages('deSolve', repos='http://cran.rstudio.com/')"`. 
 Uninstallation
 --------------
 Since everything is installed into a VM, you can easily remove the VM to 
@@ -74,15 +78,55 @@ uninstall the server and reclaim disk space. In your **shiny** folder,
 execute `vagrant destroy` and then `vagrant box remove 'ubuntu/trusty64'`.
 Troubleshooting
 ---------------
-+ If you have issues when running `vagrant up`, make sure you have an SSH key. 
-If you don't have one then you will see a `Connection timeout: Retrying....` 
-warning during this step.
-+ If you have just installed any of the requirements (VirtualBox, Vagrant, 
-Fabric), try restarting your computer and starting the process over again
-(i.e. destroy your VM).
+For starters, know that you can destroy and reinitiate your VM and run 
+`fab vagrant setup_vagrant` as many times as you want. This is especially 
+useful if the setup process is interrupted. Some more specific problems and 
+solutions are below.
+
++ If you see multiple `Connection timeout: Retrying....` warnings after running 
+`vagrant up` and the process seems frozen, it is likely that you do not have an 
+SSH key. See the link in the Requirements section for instructions on how to
+create one.
++ If you had to install any of the requirements (VirtualBox, Vagrant, 
+Fabric), try restarting your computer and beginning again. Make sure to 
+destroy your VM before starting over.
 + If you see an error regarding an installation of Paramiko when executing 
-`fab vagrant setup_vagrant` remove Fabric and reinstall Paramiko first: open 
+`fab vagrant setup_vagrant`, remove Fabric and reinstall Paramiko: open 
 Terminal and execute `sudo pip uninstall fabric`, then `sudo pip install 
 paramiko==1.10`, then `sudo pip install fabric`.
++ If you do not see the **project** folder in your **shiny** folder (or 
+**shiny-master** if you downloaded a .zip of the repo) after you run `vagrant
+up`, then Vagrant might be facing permissions issues when trying to 
+create the folder. Delete your VM, create a blank folder called **project** 
+in your repo, and start over. See below for the expected folder structure.
+
+After `vagrant up` completes, your directory structure should look like this:  
+*/shiny/*  
+|-- fabfile.py  
+|-- .gitignore  
+|-- *project/*  
+|-- README.md  
+|-- Vagrantfile
+
+When `fab vagrant setup_vagrant` is done, you should have this:  
+*/shiny/*  
+|-- fabfile.py  
+|-- .gitignore  
+|-- *project/*  
+|&nbsp;&nbsp;&nbsp; |-- index.html  
+|&nbsp;&nbsp;&nbsp; |-- *sample-apps/*  
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |-- *hello/*  
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;
+&nbsp; |-- server.R  
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;
+&nbsp; |-- ui.R  
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |-- *rmd/*  
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp; |-- index.Rmd  
+|-- README.md  
+|-- Vagrantfile
+
+Any discrepancies in the above should give you some indication of where 
+things went wrong.
 
 [1]: https://help.github.com/articles/generating-ssh-keys/
