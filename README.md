@@ -78,7 +78,9 @@ Try copying the **sample-apps** folder in **project** to the
 **writeable-project** folder, then use your browser to visit
 *localhost:7070/proj/sample-apps*. Notice that the name of the symlink is used
 in the URL for apps in the **writeable-project** folder. You can rename the
-symlink to adjust that portion of the URL.
+symlink to adjust that portion of the URL. If you are developing an app in
+**project** and you see `ERROR: Cannot open the connection` in your 
+browser when trying to access the app, it probably needs write access.
 
 If your app requires any additional R packages, SSH into the VM with `vagrant
 ssh` (make sure you are in the **shiny** folder first) and install them. For 
@@ -112,6 +114,9 @@ paramiko==1.10`, then `sudo pip install fabric`.
 up`, then Vagrant might be facing permissions issues when trying to 
 create the folder. Delete your VM, create a blank folder called **project** 
 in your repo, and start over. See below for the expected folder structure.
++ If you see `ERROR: Cannot open the connection` in your browser when trying 
+to access an app you are developing, the app probably needs write access. Try
+moving the app into the **writeable-project** folder.
 
 ### Directory Structure
 After `vagrant up` completes, your directory structure should look like this:  
