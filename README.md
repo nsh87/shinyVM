@@ -68,6 +68,18 @@ visible to the VM, so you can simply delete the sample app and develop your app
 in **shiny/project/** on your host machine. (See the bottom of this Readme for
 a visual of the directory structure).
 
+The setup sequence also created a folder called **writeable-project** in the 
+same location as **project**. In order to support their underlying R functions, 
+certain apps will require write access to their own project folder. Such apps
+should be placed into (and developed in) **shiny/writeable-project**. In
+**project** you will find a symlink named *proj* that points to the
+app-writeable folder in order to give the Shiny server access to apps in there. 
+Try copying the **sample-apps** folder in **project** to the 
+**writeable-project** folder, then use your browser to visit
+*localhost:7070/proj/sample-apps*. Notice that the name of the symlink is used
+in the URL for apps in the **writeable-project** folder. You can rename the
+symlink to adjust that portion of the URL.
+
 If your app requires any additional R packages, SSH into the VM with `vagrant
 ssh` (make sure you are in the **shiny** folder first) and install them. For 
 example, you can install the deSolve package with `vagrant ssh` and then 
@@ -108,7 +120,8 @@ After `vagrant up` completes, your directory structure should look like this:
 |-- .gitignore  
 |-- *project/*  
 |-- README.md  
-|-- Vagrantfile
+|-- Vagrantfile  
+|-- *writeable-project/*
 
 When `fab vagrant setup_vagrant` is done, you should have this:  
 */shiny/*  
@@ -116,6 +129,7 @@ When `fab vagrant setup_vagrant` is done, you should have this:
 |-- .gitignore  
 |-- *project/*  
 |&nbsp;&nbsp;&nbsp; |-- index.html  
+|&nbsp;&nbsp;&nbsp; |-- proj  
 |&nbsp;&nbsp;&nbsp; |-- *sample-apps/*  
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |-- *hello/*  
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;
@@ -126,7 +140,8 @@ When `fab vagrant setup_vagrant` is done, you should have this:
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 &nbsp; |-- index.Rmd  
 |-- README.md  
-|-- Vagrantfile
+|-- Vagrantfile  
+|-- *writeable-project/*
 
 Any discrepancies in the above should give you some indication of where 
 things went wrong.
