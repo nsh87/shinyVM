@@ -41,6 +41,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # the path on the guest to mount the folder. And the optional third
   # argument is a set of non-required options.
   config.vm.synced_folder "./project/", "/www-shiny/", create: true
+  # The shiny:shiny user is created after provisioning using uid=999 and
+  # guid=999. Mounting "/www-shiny-writeable/" using the expected uid and guid
+  # as is done below allows us to mount the shared folder with shiny:shiny
+  # permissions before the shiny user is created. This method allows the Shiny
+  # server to write to the app folder below, but not the one above (whose user
+  # is vagrant).
   config.vm.synced_folder "./writeable-project/", "/www-shiny-writeable/",
      create: true, mount_options:["uid=999,gid=999"]
   # Share the project folder to your Shiny web server folder
