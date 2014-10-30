@@ -69,12 +69,12 @@ in **shiny/project/** on your host machine. (See the bottom of this Readme for
 a visual of the directory structure).
 
 The setup sequence also created a folder called **writeable-project** in the 
-same location as **project**. In order to support their underlying R functions, 
-certain apps will require write access to their own project folder. Such apps
-should be placed into (and developed in) **shiny/writeable-project**. In
+same location as **project**. In order to support certain apps' underlying R 
+functions, Shiny server sometimes requires write access to an app folder. Such 
+apps should be placed into (and developed in) **shiny/writeable-project**. In
 **project** you will find a symlink named *proj* that points to the
-app-writeable folder in order to give the Shiny server access to apps in there. 
-Try copying the **sample-apps** folder in **project** to the 
+app-writeable folder in order to give the Shiny server and your browser access
+to apps in there. Try copying the **sample-apps** folder in **project** to the 
 **writeable-project** folder, then use your browser to visit
 *localhost:7070/proj/sample-apps*. Notice that the name of the symlink is used
 in the URL for apps in the **writeable-project** folder. You can rename the
