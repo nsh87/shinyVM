@@ -41,6 +41,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # the path on the guest to mount the folder. And the optional third
   # argument is a set of non-required options.
   config.vm.synced_folder "./project/", "/www-shiny/", create: true
+  config.vm.synced_folder "./writeable-project/", "/www-shiny-writeable/",
+     create: true, mount_options:["uid=999,gid=999"]
   # Share the project folder to your Shiny web server folder
 
   # Provider-specific configuration so you can fine-tune various

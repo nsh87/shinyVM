@@ -90,10 +90,25 @@ def sub_install_shiny():
     fi''')
 
     sub_install_rmarkdown()
+    sub_make_writeable_project()
 
     # Restart VM
     local('vagrant reload')
     run('status shiny-server')
+
+def sub_make_writeable_project():
+    """Creates a symlink from Shiny's web server folder to a shiny:shiny
+    writeable folder for app development.
+    
+    Shiny server runs in /www-shiny (/project on the host machine), whose
+    owner is vagrant:vagrant. Shiny server runs as user shiny:shiny; so if
+    you have an app that needs to write anything, you can't do it in
+    /www-shiny. You have to do it in another owned by shiny:shiny.
+    """
+    sudo('''cd /www-shiny; if [ ! -f proj ]; then \
+    ln -s /www-shiny-writeable/ proj ;
+    fi''')
+    
 
 def sub_install_rmarkdown():
     """Installs the packages required for Shiny to serve markdown documents.
