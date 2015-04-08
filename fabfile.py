@@ -73,11 +73,11 @@ def sub_install_shiny():
     # /opt/shiny-server/bin/shiny-server. Also new user 'shiny' will be
     # created.
     sudo('mkdir -p /usr/src/shiny')
-    sudo('''cd /usr/src/shiny; if [ ! -e shiny-server-1.2.3.368-amd64.deb ];
+    sudo('''cd /usr/src/shiny; if [ ! -e shiny-server-1.3.0.403-amd64.deb ];
     then a='http://download3.rstudio.org/ubuntu-12.04/x86_64/shiny-server-' ; \
-    b='1.2.3.368-amd64.deb' ; \
+    b='1.3.0.403-amd64.deb' ; \
     wget $a$b ; \
-    echo y | gdebi shiny-server-1.2.3.368-amd64.deb ; \
+    echo y | gdebi shiny-server-1.3.0.403-amd64.deb ; \
     fi''')
 
     # Move server directory at /srv/shiny-server to shared Vagrant folder if
