@@ -152,3 +152,10 @@ Any discrepancies in the above should give you some indication of where
 things went wrong.
 
 [1]: https://help.github.com/articles/generating-ssh-keys/
+
+TODO
+----
+1. Grab the current stable version of Shiny from the site for always up-to-date
+   installation
+2. Add a .Rproj so people can checkout from the repo directly in RStudio
+3. Add Fabric function to push to a production server on AWS
