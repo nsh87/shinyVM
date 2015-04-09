@@ -47,7 +47,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # permissions before the shiny user is created. This method allows the Shiny
   # server to write to the app folder below, but not the one above (whose user
   # is vagrant).
-  config.vm.synced_folder "./writeable-project/", "/www-shiny-writeable/",
+  config.vm.synced_folder "./writeable-project/", "/writeable-project/",
      create: true, mount_options:["uid=999,gid=999"]
   # Share the project folder to your Shiny web server folder
 

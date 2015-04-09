@@ -132,7 +132,7 @@ def sub_make_writeable_project():
     /www-shiny. You have to do it in another owned by shiny:shiny.
     """
     sudo('''cd /www-shiny; if [ ! -L proj ]; then \
-    ln -s /www-shiny-writeable/ proj ;
+    ln -s ../writeable-project/ proj ;
     fi''')
 
 def sub_install_rmarkdown():
