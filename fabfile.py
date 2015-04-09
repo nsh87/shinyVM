@@ -50,8 +50,8 @@ def sub_add_repos():
     """Adds any repositories needed to install packages"""
     if not exists('/etc/apt/sources.list.d/cran.list', use_sudo=True):
         # Add the repository for R
-        sudo('sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys '
-             'E084DAB9')
+        sudo('sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 '
+             '--recv-keys E084DAB9')
         run('sudo sh -c "echo \'deb http://cran.rstudio.com/bin/linux/ubuntu '
             'trusty/\' >> /etc/apt/sources.list.d/cran.list"')
 
