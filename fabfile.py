@@ -1,6 +1,7 @@
-from fabric.api import run, sudo, env, require, settings, local
+from fabric.api import run, sudo, env, require, settings, local, put
 from fabric.contrib.files import exists
 import subprocess
+import os
 
 ### VARIABLES ###
 
@@ -17,8 +18,8 @@ INSTALL_PACKAGES = ['r-base',
 
 def vagrant():
     """Defines the Vagrant virtual machine's environment variables.
-    Local development and server will us this environment."""
-
+    Local development and server will use this environment.
+    """
     # Configure SSH things
     raw_ssh_config = subprocess.Popen(['vagrant', 'ssh-config'],
                                       stdout=subprocess.PIPE).communicate()[0]
@@ -31,6 +32,18 @@ def vagrant():
     # Development will happen on the master branch
     env.repo = ('origin', 'master')
 
+def remote():
+    """Defines a remote server on AWS running Ubuntu 14.x, ideally with >1.5GB
+    RAM.
+    """
+    # Insert values for:
+    env.hosts = 'ec2-52-13.us-west-2.compute.amazonaws.com'  # Your public DNS
+    env.key_filename = os.path.join('/', 'my.pem')  # Path to your AWS .pem key
+
+    # Don't change unless you know what you are doing:
+    env.base = '/www-shiny'  # Default location for Shiny Server apps
+    env.user = 'ubuntu'  # Default username for AWS SSH login
+
 ### ROUTINES ###
 
 def setup_vagrant():
@@ -39,10 +52,27 @@ def setup_vagrant():
     sub_add_repos()
     sub_install_packages()
     sub_install_shiny()
+    reload_server()
 
-def reload():
-    require('hosts', provided_by=[vagrant])
+def bootstrap():
+    """Sets up the remote environment"""
+    require('hosts', provided_by=[remote])
+    sub_add_repos()
+    sub_install_packages()
+    sub_install_shiny()
+    reload_server()
+
+def reload_server():
+    require('hosts', provided_by=[vagrant, remote])
     sudo('restart shiny-server')
+
+def push():
+    """Pushes the current folder to the remote machine's Shiny apps folder"""
+    require('hosts', provided_by=[remote])
+    sudo('mkdir -p /www-shiny')
+    sudo('chown -R ubuntu:ubuntu /www-shiny')
+    sudo('rm -rf /www-shiny/*')
+    put('./', '/www-shiny/')
 
 ### SUB-ROUTINES ###
 
@@ -92,10 +122,6 @@ def sub_install_shiny():
     sub_install_rmarkdown()
     sub_make_writeable_project()
 
-    # Restart VM
-    local('vagrant reload')
-    run('status shiny-server')
-
 def sub_make_writeable_project():
     """Creates a symlink from Shiny's web server folder to a shiny:shiny
     writeable folder for app development.
@@ -109,7 +135,6 @@ def sub_make_writeable_project():
     ln -s /www-shiny-writeable/ proj ;
     fi''')
     
-
 def sub_install_rmarkdown():
     """Installs the packages required for Shiny to serve markdown documents.
     Haskell is a prerequisite that should have been installed earlier. Pandoc is
