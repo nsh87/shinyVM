@@ -120,6 +120,7 @@ def sub_install_shiny():
     fi''')
 
     sub_install_rmarkdown()
+    sub_install_additional_packages()
     sub_make_writeable_project()
 
 def sub_make_writeable_project():
@@ -143,3 +144,14 @@ def sub_install_rmarkdown():
     run('cabal install pandoc --avoid-reinstalls')
     sudo('R -e "install.packages(\'rmarkdown\', '
          'repos=\'http://cran.rstudio.com/\')"')
+
+def sub_install_additional_packages():
+    """This is an example function demonstrating how to add the installation of
+    an R package to the setup process.
+    
+    Simply uncomment the lines below and replace the name of the package and the
+    URL to its repo if necessary. Then delete the line that says 'pass'.
+    """
+    # sudo('R -e "install.packages(\'rmarkdown\', '
+    #     'repos=\'http://cran.rstudio.com/\')"')
+    pass

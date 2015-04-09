@@ -89,6 +89,11 @@ example, you can install the deSolve package with `vagrant ssh` and then
 Note that some packages might have dependencies outside of R. For example, in
 order to install the R package RCurl, you will first have to install
 libcurl4-gnutls-dev on Ubuntu via `sudo apt-get install libcurl4-gnutls-dev`.
+Alternatively, if you're looking for something reproducible and you're familiar
+with Python, you can add the installation of an R package to the `fab vagrant
+setup_vagrant` sequence; check out the function
+`sub_install_additional_package()` in **fabfile.py** for instructions.
+
 Uninstallation
 --------------
 Since everything is installed into a VM, you can easily remove the VM to 
