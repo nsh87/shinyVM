@@ -117,6 +117,11 @@ in your repo, and start over. See below for the expected folder structure.
 + If you see `ERROR: Cannot open the connection` in your browser when trying 
 to access an app you are developing, the app probably needs write access. Try
 moving the app into the **writeable-project** folder.
++ If you are running out of memory while trying to install a package you 
+can increase the amount of RAM available to the VM. Open up *Vagrantfile*, 
+which controls the settings for the VM, and edit the line that looks similar 
+to `["modifyvm", :id, "--memory", "1536"]`. Change `1536` MB (1.5GB), save 
+the file, then execute `vagrant reload` to restart the VM with the new settings.
 
 ### Directory Structure
 After `vagrant up` completes, your directory structure should look like this:  
