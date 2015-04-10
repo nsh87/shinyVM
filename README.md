@@ -85,7 +85,10 @@ browser when trying to access the app, it probably needs write access.
 If your app requires any additional R packages, SSH into the VM with `vagrant
 ssh` (make sure you are in the **shiny** folder first) and install them. For 
 example, you can install the deSolve package with `vagrant ssh` and then 
-`sudo R -e "install.packages('deSolve', repos='http://cran.rstudio.com/')"`. 
+`sudo R -e "install.packages('deSolve', repos='http://cran.rstudio.com/')"`.
+Note that some packages might have dependencies outside of R. For example, in
+order to install the R package RCurl, you will first have to install
+libcurl4-gnutls-dev on Ubuntu via `sudo apt-get install libcurl4-gnutls-dev`.
 Uninstallation
 --------------
 Since everything is installed into a VM, you can easily remove the VM to 
