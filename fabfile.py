@@ -103,11 +103,11 @@ def sub_install_shiny():
     # /opt/shiny-server/bin/shiny-server. Also new user 'shiny' will be
     # created.
     sudo('mkdir -p /usr/src/shiny')
-    sudo('''cd /usr/src/shiny; if [ ! -e shiny-server-1.3.0.403-amd64.deb ];
+    sudo('''cd /usr/src/shiny; if [ ! -e shiny-server-1.4.1.759-amd64.deb ];
     then a='http://download3.rstudio.org/ubuntu-12.04/x86_64/shiny-server-' ; \
-    b='1.3.0.403-amd64.deb' ; \
+    b='1.4.1.759-amd64.deb' ; \
     wget $a$b ; \
-    echo y | gdebi shiny-server-1.3.0.403-amd64.deb ; \
+    echo y | gdebi shiny-server-1.4.1.759-amd64.deb ; \
     fi''')
 
     # Move server directory at /srv/shiny-server to shared Vagrant folder if
@@ -125,7 +125,7 @@ def sub_install_shiny():
 def sub_make_writeable_project():
     """Creates a symlink from Shiny's web server folder to a shiny:shiny
     writeable folder for app development.
-    
+
     Shiny server runs in /www-shiny (/project on the host machine), whose
     owner is vagrant:vagrant. Shiny server runs as user shiny:shiny; so if
     you have an app that needs to write anything, you can't do it in
@@ -134,7 +134,7 @@ def sub_make_writeable_project():
     sudo('''cd /www-shiny; if [ ! -L proj ]; then \
     ln -s /www-shiny-writeable/ proj ;
     fi''')
-    
+
 def sub_install_rmarkdown():
     """Installs the packages required for Shiny to serve markdown documents.
     Haskell is a prerequisite that should have been installed earlier. Pandoc is
