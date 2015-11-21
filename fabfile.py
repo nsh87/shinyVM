@@ -140,6 +140,6 @@ def sub_install_rmarkdown():
     Haskell is a prerequisite that should have been installed earlier. Pandoc is
     also required."""
     run('cabal update')
-    run('cabal install pandoc')
+    run('cabal install pandoc --avoid-reinstalls')
     sudo('R -e "install.packages(\'rmarkdown\', '
          'repos=\'http://cran.rstudio.com/\')"')
