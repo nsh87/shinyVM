@@ -5,7 +5,7 @@ Description
 -----------
 
 This will create and run a local Shiny Server for R to enable viewing of the 
-sample Shiny application and the creation your own Shiny app. This is 
+sample Shiny application and the creation of your own Shiny app. This is 
 suitable for both local development and future deployment of a Shiny Server 
 with your app.
 
