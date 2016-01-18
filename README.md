@@ -1,7 +1,9 @@
 Shiny
 =====
+
 Description
 -----------
+
 This will create and run a local Shiny Server for R to enable viewing of the 
 sample Shiny application and the creation your own Shiny app. This is 
 suitable for both local development and future deployment of a Shiny Server 
@@ -13,10 +15,12 @@ a virtual machine (VM) running Ubuntu Server 14.04 and install the necessary
 R and Shiny packages onto the VM, with R Markdown enabled (allowing the 
 server to serve Markdown docs). Shiny app files will be editable using your 
 host machine. The Shiny server will be accessed in your browser at 
-*localhost:7070*. This should greatly simplify the process of creating a 
-Shiny Server.
+[localhost:7070](http://localhost:7070). This should greatly simplify the
+process of creating a Shiny Server.
+
 Requirements
 ------------
+
 If you are using Windows the requirements and process should be similar, 
 if not exactly the same. The installation of Python/Fabric is likely the 
 only challenge, but both work on Windows if installed correctly. For ease, 
@@ -43,23 +47,27 @@ VM with Vagrant. See the GitHub instructions for [checking for and creating
 an SSH key][1]. You do not need to go through Step 3 and 4 in their 
 instructions, and if you find a key named `id_rsa` in Step 1 then you can 
 also skip Step 2.
+
 Installation
 ------------
+
 Clone or download this repository onto your computer. Then open your Terminal
 and `cd` into the repository on your computer. Run `vagrant up` to create 
 the virtual machine. Finally, run `fab vagrant setup_vagrant` to install and
 set up the Shiny Server and its dependencies. That's it! The last line in 
 your terminal should give you the status of your Shiny Server. Open your 
-web browser and using the address bar visit *localhost:7070* to view the 
-sample app.
+web browser and using the address bar visit
+[localhost:7070](http://localhost:7070) to view the sample app.
 
 To shutdown the server execute `vagrant halt`. This will stop the VM. To boot 
 the server again execute `vagrant up`. You do not need to execute `fab 
 vagrant setup_vagrant` if the process completed successfully earlier.
 
 If things do not run as expected see the Troubleshooting section below. 
+
 Creating Apps
 -------------
+
 During the setup process, the Shiny Server on your VM was directed to look in a 
 new shared folder called **project** that was created in your repository. When 
 you view the sample Shiny app in your browser, the Shiny Server reads the 
@@ -92,15 +100,18 @@ libcurl4-gnutls-dev on Ubuntu via `sudo apt-get install libcurl4-gnutls-dev`.
 Alternatively, if you're looking for something reproducible and you're familiar
 with Python, you can add the installation of an R package to the `fab vagrant
 setup_vagrant` sequence; check out the function
-`sub_install_additional_package()` in **fabfile.py** for instructions.
+`sub_install_additional_packages()` in **fabfile.py** for instructions.
 
 Uninstallation
 --------------
+
 Since everything is installed into a VM, you can easily remove the VM to 
 uninstall the server and reclaim disk space. In your **shiny** folder, 
 execute `vagrant destroy` and then `vagrant box remove 'ubuntu/trusty64'`.
+
 Troubleshooting
 ---------------
+
 For starters, know that you can destroy and reinitiate your VM and run 
 `fab vagrant setup_vagrant` as many times as you want. This is especially 
 useful if the setup process is interrupted. Some more specific problems and 
@@ -133,6 +144,7 @@ the file, then execute `vagrant reload` to restart the VM with the new
 settings.
 
 ### Directory Structure
+
 After `vagrant up` completes, your directory structure should look like this:  
 */shiny/*  
 |-- fabfile.py  
@@ -169,6 +181,7 @@ things went wrong.
 
 TODO
 ----
+
 1. Grab the current stable version of Shiny from the site for always up-to-date
    installation
 2. Add a .Rproj so people can checkout from the repo directly in RStudio
