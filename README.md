@@ -140,7 +140,7 @@ moving the app into the **writeable-project** folder.
 + If you are running out of memory while trying to install a package you 
 can increase the amount of RAM available to the VM. Open up *Vagrantfile*, 
 which controls the settings for the VM, and edit the line that looks similar 
-to `["modifyvm", :id, "--memory", "1792"]`. Change `1792` MB (1.8GB), save 
+to `["modifyvm", :id, "--memory", "2048"]`. Change `2048` MB (2.0GB), save 
 the file, then execute `vagrant reload` to restart the VM with the new
 settings.
 
