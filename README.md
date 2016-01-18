@@ -84,7 +84,8 @@ apps should be placed into (and developed in) **shiny/writeable-project**. In
 app-writeable folder in order to give the Shiny server and your browser access
 to apps in there. Try copying the **sample-apps** folder in **project** to the 
 **writeable-project** folder, then use your browser to visit
-*localhost:7070/proj/sample-apps*. Notice that the name of the symlink is used
+[localhost:7070/proj/sample-apps](http://localhost:7070/proj/sample-apps).
+Notice that the name of the symlink is used
 in the URL for apps in the **writeable-project** folder. You can rename the
 symlink to adjust that portion of the URL. If you are developing an app in
 **project** and you see `ERROR: Cannot open the connection` in your 
