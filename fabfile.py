@@ -103,11 +103,11 @@ def sub_install_shiny():
     # /opt/shiny-server/bin/shiny-server. Also new user 'shiny' will be
     # created.
     sudo('mkdir -p /usr/src/shiny')
-    sudo('''cd /usr/src/shiny; if [ ! -e shiny-server-1.4.1.759-amd64.deb ];
+    sudo('''cd /usr/src/shiny; if [ ! -e shiny-server-1.4.2.786-amd64.deb ];
     then a='http://download3.rstudio.org/ubuntu-12.04/x86_64/shiny-server-' ; \
-    b='1.4.1.759-amd64.deb' ; \
+    b='1.4.2.786-amd64.deb' ; \
     wget $a$b ; \
-    echo y | gdebi shiny-server-1.4.1.759-amd64.deb ; \
+    echo y | gdebi shiny-server-1.4.2.786-amd64.deb ; \
     fi''')
 
     # Move server directory at /srv/shiny-server to shared Vagrant folder if
@@ -148,7 +148,7 @@ def sub_install_rmarkdown():
 def sub_install_additional_packages():
     """This is an example function demonstrating how to add the installation of
     an R package to the setup process.
-    
+
     Simply uncomment the lines below and replace the name of the package and the
     URL to its repo if necessary. Then delete the line that says 'pass'.
     """
