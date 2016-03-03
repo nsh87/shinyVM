@@ -187,4 +187,4 @@ TODO
    installation
 2. Add a .Rproj so people can checkout from the repo directly in RStudio
 3. Add Fabric function to push to a production server on AWS
-4. Someone with a Windows machine please address Issue [#2](https://github.com/nsh87/shinyVM/pull/2)
+4. Someone with a Windows machine please address [PR #2](https://github.com/nsh87/shinyVM/pull/2)
