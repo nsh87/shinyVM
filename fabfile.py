@@ -27,7 +27,8 @@ def vagrant():
                        if l])
     env.hosts = ['127.0.0.1:%s' % (ssh_config['Port'])]
     env.user = ssh_config['User']
-    env.key_filename = ssh_config['IdentityFile']
+    env.key_filename = ssh_config['IdentityFile']\
+                        .replace("'", "").replace('"', '')
 
     # Development will happen on the master branch
     env.repo = ('origin', 'master')
