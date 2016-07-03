@@ -3,3 +3,4 @@
 .swp
 .vagrant
 *.pyc
+.ropeproject/
