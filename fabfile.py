@@ -12,7 +12,9 @@ GIT_REPO = 'nsh87/shiny'
 # Packages to install in Vagrant
 INSTALL_PACKAGES = ['r-base',
                     'gdebi-core',
-                    'haskell-platform']
+                    'haskell-platform',
+                    'libghc-pandoc-dev',
+                    'pandoc']
 
 ### ENVIRONMENTS ###
 
@@ -21,14 +23,11 @@ def vagrant():
     Local development and server will use this environment.
     """
     # Configure SSH things
-    raw_ssh_config = subprocess.Popen(['vagrant', 'ssh-config'],
-                                      stdout=subprocess.PIPE).communicate()[0]
-    ssh_config = dict([l.strip().split() for l in raw_ssh_config.split("\n")
-                       if l])
+    raw_ssh_config = subprocess.Popen(['vagrant', 'ssh-config'], stdout=subprocess.PIPE).communicate()[0]
+    ssh_config = dict([l.strip().split() for l in raw_ssh_config.decode('utf-8').split("\n") if l])
     env.hosts = ['127.0.0.1:%s' % (ssh_config['Port'])]
     env.user = ssh_config['User']
-    env.key_filename = ssh_config['IdentityFile']\
-                        .replace("'", "").replace('"', '')
+    env.key_filename = ssh_config['IdentityFile'].replace("'", "").replace('"', '')
 
     # Development will happen on the master branch
     env.repo = ('origin', 'master')
@@ -91,7 +90,7 @@ def sub_install_packages():
     sudo('apt-get update')
     sudo('apt-get -y upgrade')
     package_str = ' '.join(INSTALL_PACKAGES)
-    sudo('apt-get -y install ' + package_str)
+    sudo('apt-get -y --force-yes install ' + package_str)
 
 def sub_install_shiny():
     """Installs Shiny package and Shiny Server"""
@@ -142,7 +141,6 @@ def sub_install_rmarkdown():
     Haskell is a prerequisite that should have been installed earlier. Pandoc is
     also required."""
     run('cabal update')
-    run('cabal install pandoc --avoid-reinstalls')
     sudo('R -e "install.packages(\'rmarkdown\', '
          'repos=\'http://cran.rstudio.com/\')"')
 
